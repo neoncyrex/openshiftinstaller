@@ -8,27 +8,30 @@
      hostname: name={{inventory_hostname}}
 
    - name: register host on redhat
-     command: subscription-manager register --username='{{redhat_user}}' --password='{{redhat_password}}' --auto-attach --force
-     register: redhat_subscription
-     until: (redhat_subscription.stdout.find('System already registered') != -1 or redhat_subscription.rc == 0)
-     retries: 10
-     delay: 10
+     redhat_subscription: autosubscribe=true password={{redhat_password}} username={{redhat_user}} pool="Red Hat OpenShift, Standard Support*"
 
-   - name: get pool ID
-     shell: subscription-manager list --available --all|grep "Pool ID:"|awk '{print $3}'
-     register: pool_id
-     changed_when: false
+#   - name: register host on redhat
+#     command: subscription-manager register --username='{{redhat_user}}' --password='{{redhat_password}}' --auto-attach --force
+#     register: redhat_subscription
+#     until: (redhat_subscription.stdout.find('System already registered') != -1 or redhat_subscription.rc == 0)
+#     retries: 10
+#     delay: 10
+
+#   - name: get pool ID
+#     shell: subscription-manager list --available --all|grep "Pool ID:"|awk '{print $3}'
+#     register: pool_id
+#     changed_when: false
 
 
-   - name: attach system to subscription
-     shell: subscription-manager attach --pool {{pool_id.stdout}}
-     ignore_errors: true
-     when: pool_id.stdout != ""
+#   - name: attach system to subscription
+#     shell: subscription-manager attach --pool {{pool_id.stdout}}
+#     ignore_errors: true
+#     when: pool_id.stdout != ""
 
-   - name: get list of enabled repos
-     shell: subscription-manager repos --list-enabled|grep "Repo ID"|awk '{print $3}'
-     changed_when: false
-     register: repos
+#   - name: get list of enabled repos
+#     shell: subscription-manager repos --list-enabled|grep "Repo ID"|awk '{print $3}'
+#     changed_when: false
+#     register: repos
    
 
    - name: configing required repositories
