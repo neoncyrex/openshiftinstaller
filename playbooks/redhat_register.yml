@@ -51,7 +51,7 @@
 
 
    - name: start and enable docker service
-    service: name=docker state=started enabled=yes
+     service: name=docker state=started enabled=yes
 
 #- name: disable StrictHostKeyChecking in ssh client config
 #  lineinfile: dest=/etc/ssh/ssh_config line='StrictHostKeyChecking no' state=present insertafter="SendEnv XMODIFIERS"
