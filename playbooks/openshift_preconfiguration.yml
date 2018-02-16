@@ -10,7 +10,7 @@
      hostname: name={{inventory_hostname}}
 
    - name: register host on redhat
-     redhat_subscription: autosubscribe=true password={{redhat_password}} username={{redhat_user}} pool="Red Hat OpenShift, Standard Support*"
+     redhat_subscription: autosubscribe=true password={{redhat_password}} username={{redhat_user}} pool="Red Hat OpenShift, Standard Support*" force_register=true
 
    - name: configing required repositories
      command: subscription-manager repos --disable="*" --enable="rhel-7-server-rpms" --enable="rhel-7-server-extras-rpms"  --enable="rhel-7-server-ose-3.7-rpms" --enable="rhel-7-fast-datapath-rpms"
