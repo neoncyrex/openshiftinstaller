@@ -26,7 +26,7 @@
         "ImageId": "ami-26ebbc5c",
         "BlockDeviceMappings" : [
           {
-            "DeviceName" : "/dev/xvdh",
+            "DeviceName" : "/dev/xvdf",
             "Ebs" : {
               "VolumeType" : "gp2",
               "DeleteOnTermination" : "true",
@@ -60,7 +60,7 @@
         "ImageId": "ami-26ebbc5c",
         "BlockDeviceMappings" : [
           {
-            "DeviceName" : "/dev/xvdh",
+            "DeviceName" : "/dev/xvdf",
             "Ebs" : {
               "VolumeType" : "gp2",
               "DeleteOnTermination" : "true",
@@ -94,7 +94,7 @@
         "ImageId": "ami-26ebbc5c",
         "BlockDeviceMappings" : [
           {
-            "DeviceName" : "/dev/xvdh",
+            "DeviceName" : "/dev/xvdf",
             "Ebs" : {
               "VolumeType" : "gp2",
               "DeleteOnTermination" : "true",
