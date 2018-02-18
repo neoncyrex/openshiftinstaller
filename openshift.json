@@ -1,0 +1,117 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Parameters": {
+    "KeyName": {
+      "Description": "Name of an existing ec2 KeyPair to enable SSH access",
+      "Type": "AWS::EC2::KeyPair::KeyName",
+      "ConstraintDescription": "Must be the name of an existing EC2 KeyPair"
+    }
+  },
+
+
+  "Resources": {
+
+    "OpenShiftMaster": {
+      "Type": "AWS::EC2::Instance",
+      "Properties": {
+        "InstanceType": "t2.medium",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "openshift.demo.li9.com"
+          }
+        ],
+
+        "KeyName": { "Ref": "KeyName" },
+        "ImageId": "ami-26ebbc5c",
+        "BlockDeviceMappings" : [
+          {
+            "DeviceName" : "/dev/xvdh",
+            "Ebs" : {
+              "VolumeType" : "gp2",
+              "DeleteOnTermination" : "true",
+              "VolumeSize" : "10"
+            }
+          }
+        ]
+
+      }
+    },
+    "OpenShiftMasterIP": {
+      "Type": "AWS::EC2::EIPAssociation",
+      "Properties": {
+        "EIP": "35.171.49.12",
+        "InstanceId": {"Ref": "OpenShiftMaster" }
+      }
+    },
+
+    "OpenShiftNode1": {
+      "Type": "AWS::EC2::Instance",
+      "Properties": {
+        "InstanceType": "t2.medium",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "openshift1.demo.li9.com"
+          }
+        ],
+
+        "KeyName": { "Ref": "KeyName" },
+        "ImageId": "ami-26ebbc5c",
+        "BlockDeviceMappings" : [
+          {
+            "DeviceName" : "/dev/xvdh",
+            "Ebs" : {
+              "VolumeType" : "gp2",
+              "DeleteOnTermination" : "true",
+              "VolumeSize" : "10"
+            }
+          }
+        ]
+
+      }
+    },
+    "OpenShiftNode1IP": {
+      "Type": "AWS::EC2::EIPAssociation",
+      "Properties": {
+        "EIP": "52.4.208.27",
+        "InstanceId": {"Ref": "OpenShiftNode1" }
+      }
+    },
+
+    "OpenShiftNode2": {
+      "Type": "AWS::EC2::Instance",
+      "Properties": {
+        "InstanceType": "t2.medium",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "openshift2.demo.li9.com"
+          }
+        ],
+
+        "KeyName": { "Ref": "KeyName" },
+        "ImageId": "ami-26ebbc5c",
+        "BlockDeviceMappings" : [
+          {
+            "DeviceName" : "/dev/xvdh",
+            "Ebs" : {
+              "VolumeType" : "gp2",
+              "DeleteOnTermination" : "true",
+              "VolumeSize" : "10"
+            }
+          }
+        ]
+
+      }
+    },
+    "OpenShiftNode2IP": {
+      "Type": "AWS::EC2::EIPAssociation",
+      "Properties": {
+        "EIP": "35.172.11.164",
+        "InstanceId": {"Ref": "OpenShiftNode2" }
+      }
+    }
+  }
+
+}
